@@ -5,9 +5,6 @@ import htm from "https://unpkg.com/htm@latest/dist/htm.module.js?module";
 const html = htm.bind(h);
 
 
-// Url object for storing parameters
-
-
 // Counter
 function useCounter(){
     const [counter, setCounter] = useState(0);
@@ -28,6 +25,31 @@ function useCounter(){
         setCounter(0)
     }, [counter])
     return {counter, counterPrev, increment, decrement, startOver}
+}
+
+
+// Url object
+function useUrl(){
+    const [urlObject, setUrlObject] = useState({
+        gender: '',
+        eyewear_type: '',
+        lenstype: '',
+        frame_size: '',
+        blue_light: '',
+        shade: '',
+        face_shape: '',
+        facial_features: '',
+        shape: '',
+        brand: ''
+    });
+    const updateUrlObjValue = (key, val)=>{
+        const obj = {}
+        obj[key] = val
+        const updatedValue ={...urlObject, ...obj}
+        setUrlObject(updatedValue);
+    }
+    return {updateUrlObjValue, urlObject}
+    
 }
 
 
@@ -304,6 +326,7 @@ const Widget = () => {
 
 
     const {counter, counterPrev, increment, decrement, startOver} = useCounter()
+    const {urlObject, updateUrlObjValue} = useUrl()
     
 
     // Screen 0 func
@@ -427,10 +450,10 @@ const Widget = () => {
         return html`
         <${headerText} text="You are looking for"/>
         <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{console.log('5'); increment()}}/>
+         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); increment()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{console.log('4'); increment()}}/>
-        <${bottomLink} func="${()=>{console.log('4,5'); increment()}}" text="${"I'd like to see both"}"/>`
+         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); increment()}}/>
+        <${bottomLink} func="${()=>{updateUrlObjValue('gender', '4,5'); increment()}}" text="${"I'd like to see both"}"/>`
     }
 
 
