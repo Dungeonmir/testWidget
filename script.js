@@ -77,6 +77,14 @@ const Widget = () => {
             align-items: center;
             justify-content: center;
         }
+        #glasses-quiz-widget > .main{
+            width:375px;
+            height: 572px;
+            background: #F7F8F9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .arrow_right{
             cursor: pointer;
             width: 50px;
@@ -93,7 +101,7 @@ const Widget = () => {
             transition: 0.3s;
             transform:scale(1.5)
         }
-        .screen0 .main{
+        .screen0 > .main{
             width: 375px;
             height: 572px;
             background: linear-gradient(180deg, #E8F0F2 0%, rgba(232, 240, 242, 0) 100%);
@@ -186,6 +194,16 @@ const Widget = () => {
             text-align: center;
             color: #3C5060;
         }
+        .headerText{
+            margin-top: 50px;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 29px;
+            text-align: center;
+            color: #0F0F0F;
+        }
         .inlineFlex{
             display: flex;
             flex-direction: row;
@@ -223,9 +241,6 @@ const Widget = () => {
             background: linear-gradient(290.47deg, #3797FA 11.33%, #45C9FF 83.66%);
             border-radius: 4px;
             left: -375px;
-        }
-        #glasses-quiz-widget > .main{
-            background-color: darkgray;
         }
         @media only screen and (min-width: 700px) {
             .screen0 .main{
@@ -324,6 +339,13 @@ const Widget = () => {
         </div>`
     }
 
+
+    const headerText = ({text}) =>{
+        return html`<div class="headerText">
+          <p>${text}</p>
+        </div>`
+      }
+
     
     // Screen container
     const main = ()=>{
@@ -337,7 +359,7 @@ const Widget = () => {
     // Screen 1
     const screen1 = ()=>{
         return html`
-        <div>screen1</div>`
+        <${headerText} text="You are looking for"/>`
     }
 
 
