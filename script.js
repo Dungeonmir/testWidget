@@ -26,17 +26,60 @@ function useCounter(){
 
 // Основная точка виджета
 const Widget = () => {
-    const {counter, increment, decrement, startOver} = useCounter()
-    // Upbar
+    // Добавление стилей перед отображением виджета
+    const styles = html`
+    <style>
+        .upbar{
+            background-color: gray;
+        }
+        .upbar_header{
+            background-color: beige;
+        }
+        .line{
+            height: 8px;
+        }
+        .main{
+            background-color: darkgray;
+        }
+    </style>`
 
+
+    const {counter, increment, decrement, startOver} = useCounter()
+    
+    // Header upper part of upbar
+    const header = ()=>{
+        return html`
+            <div class="upbar_header">back 1/10 exit</div>`
+    }
+
+
+    // Progress bar
+    const progress =()=>{
+        return html`<div class="line"/>`
+    }
+
+
+    // Upbar
+    const upbar = ()=>{
+        return html`
+        <div class="upbar">
+            <${header}/>
+            <${progress}/>
+        </div>`
+    }
 
     // Screen container
+    const main = ()=>{
+        return html`
+        <div class="main">main</div>`
+    }
 
 
-    // Screen switch
-
-
-    return html`<p>Screen ${counter}</p><br/><button onclick="${increment}">next</button>`;
+    return html`
+    ${styles}
+    <${upbar}/>
+    <${main}/>
+    `;
 };
 
 
