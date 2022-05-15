@@ -11,16 +11,21 @@ const html = htm.bind(h);
 // Counter
 function useCounter(){
     const [counter, setCounter] = useState(0);
+    const counterPrev = 0;
+    const savePrev = ()=> counterPrev = counter
     const increment = useCallback(()=>{
+        savePrev
         setCounter(counter+1)
     }, [counter])
     const decrement = useCallback(()=>{
+        savePrev
         setCounter(counter-1)
     }, [counter])
     const startOver = useCallback(()=>{
+        savePrev
         setCounter(0)
     }, [counter])
-    return {counter, increment, decrement, startOver}
+    return {counter, counterPrev, increment, decrement, startOver}
 }
 
 
@@ -159,13 +164,65 @@ const Widget = () => {
         transition: all 0.3s;
         }
         .upbar{
-            background-color: gray;
+            background: #FFFFFF;
+            box-shadow: 0px 1px 2px rgba(58, 72, 80, 0.07), 0px 6px 13px rgba(176, 189, 197, 0.14);
+            width: 375px;
+            height: 66px;
+            overflow: hidden;
+            position: relative;
         }
         .upbar_header{
-            background-color: beige;
+            height: 58px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 19px;
+            text-align: center;
+            color: #3C5060;
+        }
+        .inlineFlex{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .btnBack{
+            height: 58px;
+            width: 54px;
+        }
+        .btnExit{
+            height: 58px;
+            width: 58.39px;
+        }
+        .scale > img{
+           transition: 0.3s
+        }
+        .scale:hover > img{
+            transition: .3s;
+            transform: scale(1.3)
         }
         .line{
             height: 8px;
+        }
+        .lineGray{
+        position: absolute;
+        width: 375px;
+        height: 8px;
+        background: #D8D8D8;
+        }
+        .line{
+            position: absolute;
+            width: 375px;
+            height: 8px;
+            background: linear-gradient(290.47deg, #3797FA 11.33%, #45C9FF 83.66%);
+            border-radius: 4px;
+            left: -375px;
         }
         #glasses-quiz-widget > .main{
             background-color: darkgray;
@@ -186,7 +243,7 @@ const Widget = () => {
     </style>`
 
 
-    const {counter, increment, decrement, startOver} = useCounter()
+    const {counter, counterPrev, increment, decrement, startOver} = useCounter()
     
 
     // Screen 0 func
@@ -232,15 +289,31 @@ const Widget = () => {
         // Header upper part of upbar
         const header = ()=>{
             return html`
-            <div class="upbar_header">back 1/10 exit
-                <button onclick="${increment}"> inc</button>
+            <div class="upbar_header">
+                <div class="btnBack inlineFlex scale" onclick="${decrement}"><img src="https://svgshare.com/i/hLt.svg"/></div> 
+                <p class="">${counter}/10</p>
+                <div class="btnExit inlineFlex scale" onclick="${startOver}"><img src="https://svgshare.com/i/hLZ.svg"/></div>        
             </div>`
     }
 
 
         // Progress bar
         const progress =()=>{
-            return html`<div class="line"/>`
+            useEffect(()=>
+            {
+            let line = document.querySelector(".line");
+            const maxCounter = 10;
+            line.animate([
+               // keyframes
+               { left: (counterPrev)*(375/maxCounter)-375 + "px" /*Линия с прошлого слайда*/},
+               { left: counter*(375/maxCounter)-375 + "px" }
+             ], {
+               // timing options
+               duration: 800
+             });
+             line.style.left =  counter*(375/maxCounter)-375 + "px";
+            })
+            return html`<div class="lineGray"/><div class="line"/>`
     }
 
 
