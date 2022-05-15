@@ -11,18 +11,20 @@ const html = htm.bind(h);
 // Counter
 function useCounter(){
     const [counter, setCounter] = useState(0);
-    const counterPrev = 0;
-    const savePrev = ()=> counterPrev = counter
+    const [counterPrev, setCounterPrev] = useState(0);
+    const savePrev = ()=>{
+        setCounterPrev(counter);
+    } 
     const increment = useCallback(()=>{
-        savePrev
+        savePrev.call();
         setCounter(counter+1)
     }, [counter])
     const decrement = useCallback(()=>{
-        savePrev
+        savePrev.call();
         setCounter(counter-1)
     }, [counter])
     const startOver = useCallback(()=>{
-        savePrev
+        savePrev.call();
         setCounter(0)
     }, [counter])
     return {counter, counterPrev, increment, decrement, startOver}
@@ -49,6 +51,23 @@ const Widget = () => {
         }
         .link{
             cursor: pointer;
+        }
+        .bottomLink{
+            position: absolute;
+            bottom: 24px;
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            text-decoration-line: underline;
+            color: #3A4850;
+            transition: 1s;
+        }
+        .bottomLink:hover{
+            color:#45C9FF;
+            transition: 0.3s;
         }
         .screen0{
             position: relative;
@@ -78,6 +97,7 @@ const Widget = () => {
             justify-content: center;
         }
         #glasses-quiz-widget > .main{
+            position: relative;
             width:375px;
             height: 572px;
             background: #F7F8F9;
@@ -384,6 +404,14 @@ const Widget = () => {
         `;
       }
 
+
+    // Bottom link
+    const bottomLink = ({func, text})=>{
+        return html`<div class="bottomLink link">
+          <p onclick=${()=>{func()}}>${text}</p>
+        </div>`;
+    } 
+
     
     // Screen container
     const main = ()=>{
@@ -399,16 +427,17 @@ const Widget = () => {
         return html`
         <${headerText} text="You are looking for"/>
         <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{console.log('5')}}/>
+         text="Men's Styles" onclick=${()=>{console.log('5'); increment()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{console.log('4')}}/>`
+         text="Men's Styles" onclick=${()=>{console.log('4'); increment()}}/>
+        <${bottomLink} func="${()=>{console.log('4,5'); increment()}}" text="${"I'd like to see both"}"/>`
     }
 
 
     // Screen 2
     const screen2 = ()=>{
         return html`
-        <div>screen2</div>`
+        <${bottomLink} func="${()=>{console.log('4,5'); increment()}}" text="${"I want to see both"}"/>`
     }
 
 
