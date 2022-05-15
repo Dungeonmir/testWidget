@@ -29,6 +29,9 @@ const Widget = () => {
     // Добавление стилей перед отображением виджета
     const styles = html`
     <style>
+        .screen0{
+            background: blue;
+        }
         .upbar{
             background-color: gray;
         }
@@ -46,6 +49,14 @@ const Widget = () => {
 
     const {counter, increment, decrement, startOver} = useCounter()
     
+
+    // Screen 0 func
+    const screen0  = ()=>{
+        return html`
+        <div class="screen0">screen0</div>`
+    }
+
+
     // Header upper part of upbar
     const header = ()=>{
         return html`
@@ -108,10 +119,12 @@ const Widget = () => {
     }
 
 
+    
     return html`
     ${styles}
-    <${upbar}/>
-    <${main}/>
+    ${(()=>{return counter==0 && html`<${screen0}/>`})()}
+    ${(()=>{return counter>0 && html`<${upbar}/><${main}/>`})()}
+    
     `;
 };
 
