@@ -49,7 +49,9 @@ const Widget = () => {
     // Header upper part of upbar
     const header = ()=>{
         return html`
-            <div class="upbar_header">back 1/10 exit</div>`
+            <div class="upbar_header">back 1/10 exit
+                <button onclick="${increment}"> inc</button>
+            </div>`
     }
 
 
@@ -68,10 +70,41 @@ const Widget = () => {
         </div>`
     }
 
+    
     // Screen container
     const main = ()=>{
+        const screens = [screen1, screen2, screen3, screen3_2 ]
+
         return html`
-        <div class="main">main</div>`
+        <div class="main"><${screens[counter-1]}/></div>`
+    }
+
+    
+    // Screen 1
+    const screen1 = ()=>{
+        return html`
+        <div>screen1</div>`
+    }
+
+
+    // Screen 2
+    const screen2 = ()=>{
+        return html`
+        <div>screen2</div>`
+    }
+
+
+    // Screen 3
+    const screen3 = ()=>{
+        return html`
+        <div>screen3</div>`
+    }
+
+
+    // Screen 3.2
+    const screen3_2 = ()=>{
+        return html`
+        <div>screen3.2</div>`
     }
 
 
