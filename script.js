@@ -408,8 +408,8 @@ const Widget = () => {
     }
 
 
-    const headerText = ({text}) =>{
-        return html`<div class="headerText">
+    const headerText = ({text, style}) =>{
+        return html`<div class="headerText" style="${style}">
           <p>${text}</p>
         </div>`
       }
@@ -450,7 +450,7 @@ const Widget = () => {
         return html`
         <${headerText} text="You are looking for"/>
         <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); increment()}}/>
+         text="Women's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); increment()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
          text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); increment()}}/>
         <${bottomLink} func="${()=>{updateUrlObjValue('gender', '4,5'); increment()}}" text="${"I'd like to see both"}"/>`
@@ -459,7 +459,25 @@ const Widget = () => {
 
     // Screen 2
     const screen2 = ()=>{
+        let imgEyeglasses =''
+        let imgSunglasses =''
+        
+        if (urlObject.gender=='5') {
+           imgEyeglasses = 'https://svgshare.com/i/hLG.svg'
+           imgSunglasses = 'https://svgshare.com/i/hKs.svg'
+
+        }
+        else{
+            imgEyeglasses = 'https://svgshare.com/i/hMP.svg'
+            imgSunglasses = 'https://svgshare.com/i/hKi.svg'
+        }
+        
         return html`
+        <${headerText} text="What type of glasses are you looking for?" style="width: 250px"/>
+        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 138px;" imgSource="${imgEyeglasses}" imgHeight="20.23px"}} 
+         text="Eyeglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '210'); increment()}}/>
+        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${imgSunglasses}" imgHeight="20.23px"}} 
+         text="Sunglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '211'); increment()}}/>
         <${bottomLink} func="${()=>{console.log('4,5'); increment()}}" text="${"I want to see both"}"/>`
     }
 
