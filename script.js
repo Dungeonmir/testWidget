@@ -242,6 +242,31 @@ const Widget = () => {
             border-radius: 4px;
             left: -375px;
         }
+        .choiceBtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid rgba(231, 235, 237, 0.80141);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.06);
+            border-radius: 14px;
+            transition: 1s;
+        }
+        .choiceBtn:hover{
+            border: 1px solid #45C9FF;
+            transition: 0.5s;
+        }
+        .choiceBtn p{
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 25px;
+            /* identical to box height */
+            text-align: center;
+            color: #425A60;
+        }
         @media only screen and (min-width: 700px) {
             .screen0 .main{
             width: 100%;
@@ -347,6 +372,19 @@ const Widget = () => {
       }
 
     
+    const choiceButton = ({imgSource, text, style, onclick, imgHeight}) =>{
+        const image = ()=>{
+            return html`<img style="height: ${imgHeight};" alt="${text}" src="${imgSource}" />`
+        }
+        return html`
+            <div class="choiceBtn link" style="${style}" onClick="${onclick}">
+                ${(()=>{return imgSource && html`<${image}/>`})()}                    
+                <p>${text}</p>
+            </div>
+        `;
+      }
+
+    
     // Screen container
     const main = ()=>{
         const screens = [screen1, screen2, screen3, screen3_2 ]
@@ -359,7 +397,11 @@ const Widget = () => {
     // Screen 1
     const screen1 = ()=>{
         return html`
-        <${headerText} text="You are looking for"/>`
+        <${headerText} text="You are looking for"/>
+        <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
+         text="Men's Styles" onclick=${()=>{console.log('5')}}/>
+        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
+         text="Men's Styles" onclick=${()=>{console.log('4')}}/>`
     }
 
 
