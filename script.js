@@ -957,9 +957,8 @@ const Widget = () => {
 
 
     const screen2to3 = ()=>{
-        useEffect(()=>{
-            setTimeout(setScreenId('screen3'), '2000')
-        })
+        //Changed timeout to 3.5s for future fade out transition
+        setTimeout(()=>setScreenId('screen3'), '3500')
         return html`
         <${like}/>
         <p class="blueText anim2s">Let's get to know you!</p>`
