@@ -26,7 +26,10 @@ function useCounter(){
     }, [counter])
     return {counter, counterPrev, increment, decrement, startOver}
 }
-
+function useScreenId(){
+    const [screenId, setScreenId] = useState('')
+    return {screenId, setScreenId};
+}
 
 // Url object
 function useUrl(){
@@ -744,11 +747,14 @@ const Widget = () => {
 
     const {counter, counterPrev, increment, decrement, startOver} = useCounter()
     const {urlObject, updateUrlObjValue} = useUrl()
-    
+    const {screenId, setScreenId} = useScreenId()
 
     // Screen 0 func
     const screen0  = ()=>{
-
+        const nextPage = ()=>{
+            increment();
+            setScreenId('screen1');
+        }
 
         //Logo and next page arrow
         const header  = ()=>{
@@ -756,7 +762,7 @@ const Widget = () => {
             <div class="logo">
                 <img src="https://svgshare.com/i/hKp.svg"/>
             </div>
-            <div class="arrow_right" onclick="${increment}">
+            <div class="arrow_right" onclick="${nextPage}">
                 <img src="https://svgshare.com/i/hKV.svg"/>
             </div>
             </div>`
@@ -769,7 +775,7 @@ const Widget = () => {
             <img class="glassesImg" src="https://svgshare.com/i/hJo.svg"/>
             <p class="blueText">Let’s find your perfect pair!</p>
             <p class="blackText">Take the quiz to easily discover your perfect fit from thousands of styles</p>
-            <button class="btnBlue link" onclick="${increment}">Start now</button>
+            <button class="btnBlue link" onclick="${nextPage}">Start now</button>
             </div>`
         }
 
@@ -787,10 +793,16 @@ const Widget = () => {
 
 
         // Header upper part of upbar
+        // Back button, Close button, Start over
         const header = ()=>{
+            const previousPage = ()=>{
+                const decCounter = counter - 1
+                decrement();
+                setScreenId('screen' + decCounter)
+            }
             return html`
             <div class="upbar_header">
-                <div class="btnBack inlineFlex scale" onclick="${decrement}"><img src="https://svgshare.com/i/hLt.svg"/></div> 
+                <div class="btnBack inlineFlex scale" onclick="${previousPage}"><img src="https://svgshare.com/i/hLt.svg"/></div> 
                 <p class="">${counter}/10</p>
                 <div class="btnExit inlineFlex scale" onclick="${startOver}"><img src="https://svgshare.com/i/hLZ.svg"/></div>        
             </div>`
@@ -853,6 +865,7 @@ const Widget = () => {
     } 
 
 
+    // Like hand icon svg
     const like = ()=>{
         return html`
         <svg width="182" height="182" viewBox="0 0 182 182" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
@@ -891,27 +904,34 @@ const Widget = () => {
     
     // Screen container
     const main = ()=>{
-        const screens = [screen1, screen2, screen2to3, screen3, screen3_2 ]
-
+        const screens = {screen1,screen2, screen2to3, screen3, screen3_2 }
         return html`
-        <div class="main"><${screens[counter-1]}/></div>`
+        <div class="main"><${screens[screenId]}/></div>`
     }
 
     
     // Screen 1
     const screen1 = ()=>{
+        const nextPage = () =>{
+            increment();
+            setScreenId('screen2');
+        }
         return html`
         <${headerText} text="You are looking for"/>
         <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
-         text="Women's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); increment()}}/>
+         text="Women's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); nextPage()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); increment()}}/>
-        <${bottomLink} func="${()=>{increment()}}" text="${"I'd like to see both"}"/>`
+         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); nextPage()}}/>
+        <${bottomLink} func="${()=>{nextPage()}}" text="${"I'd like to see both"}"/>`
     }
 
 
     // Screen 2
     const screen2 = ()=>{
+        const nextPage = () =>{
+            increment();
+            setScreenId('screen2to3')
+        }
         let imgEyeglasses =''
         let imgSunglasses =''
         
@@ -928,14 +948,18 @@ const Widget = () => {
         return html`
         <${headerText} text="What type of glasses are you looking for?" style="width: 250px"/>
         <${choiceButton}  style="margin-top: 32px; width: 274px; height: 138px;" imgSource="${imgEyeglasses}" imgHeight="20.23px"}} 
-         text="Eyeglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '210'); increment()}}/>
+         text="Eyeglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '210'); nextPage()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${imgSunglasses}" imgHeight="20.23px"}} 
-         text="Sunglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '211'); increment()}}/>
-        <${bottomLink} func="${()=>{console.log('4,5'); increment()}}" text="${"I want to see both"}"/>`
+         text="Sunglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '211'); nextPage()}}/>
+        <${bottomLink} func="${()=>{nextPage()}}" text="${"I want to see both"}"/>`
+
     }
 
 
     const screen2to3 = ()=>{
+        useEffect(()=>{
+            setTimeout(setScreenId('screen3'), '2000')
+        })
         return html`
         <${like}/>
         <p class="blueText anim2s">Let's get to know you!</p>`
@@ -945,7 +969,14 @@ const Widget = () => {
 
     // Screen 3
     const screen3 = ()=>{
+        const nextPage = ()=>{
+            increment();
+            setScreenId('screen4');
+        }
+        const toScreen3_2 = ()=>setScreenId('screen3_2')
         return html`
+        <button onclick="${nextPage}">next</button>
+        <button onclick="${toScreen3_2}">to screen3_2</button>
         <div>screen3</div>`
     }
 
@@ -961,7 +992,7 @@ const Widget = () => {
     return html`
     ${styles}
     ${(()=>{return counter==0 && html`<${screen0}/>`})()}
-    ${(()=>{return counter>0 && html`<${upbar}/><${main}/>`})()}
+    ${(()=>{return counter>0 && html`<${upbar}/><${main} screenId="${screenId}"/>`})()}
     
     `;
 };
