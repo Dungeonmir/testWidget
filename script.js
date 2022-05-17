@@ -868,7 +868,7 @@ const Widget = () => {
     // Like hand icon svg
     const like = ()=>{
         return html`
-        <svg width="182" height="182" viewBox="0 0 182 182" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+        <svg width="182" height="182" viewBox="0 0 182 182" fill="none" xmlns="http://www.w3.org/2000/svg" class="likeAnimation">
         <g filter="url(#filter0_dd_1_3722)">
         <path class="svg-elem-1" fill-rule="evenodd" clip-rule="evenodd" d="M156.52 90.7601C156.52 127.078 127.078 156.52 90.7598 156.52C54.4415 156.52 24.9998 127.078 24.9998 90.7601C24.9998 54.4419 54.4415 25.0001 90.7598 25.0001C127.078 25.0001 156.52 54.4419 156.52 90.7601" fill="#F7F8F9"/>
         </g>
@@ -904,7 +904,7 @@ const Widget = () => {
     
     // Screen container
     const main = ()=>{
-        const screens = {screen1,screen2, screen2to3, screen3, screen3_2 }
+        const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4 }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -956,7 +956,7 @@ const Widget = () => {
     }
 
 
-    const screen2to3 = ()=>{
+    const screen2to3 = ()=>{        
         //Changed timeout to 3.5s for future fade out transition
         setTimeout(()=>setScreenId('screen3'), '3500')
         return html`
@@ -972,21 +972,41 @@ const Widget = () => {
             increment();
             setScreenId('screen4');
         }
-        const toScreen3_2 = ()=>setScreenId('screen3_2')
         return html`
-        <button onclick="${nextPage}">next</button>
-        <button onclick="${toScreen3_2}">to screen3_2</button>
-        <div>screen3</div>`
+        <${headerText} text="Do you need vision correction?" style="width: 250px"/>
+        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 120px;" imgHeight="20.23px"}} 
+         text="Yes" onclick=${()=>{setScreenId('screen3_2')}}/>
+        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 120px;" imgHeight="20.23px"}} 
+         text="No" onclick=${()=>{nextPage()}}/>
+        <${bottomLink} func="${()=>{nextPage()}}" text="${"Skip"}"/>`
     }
 
 
     // Screen 3.2
     const screen3_2 = ()=>{
+        const nextPage = (choiceData)=>{
+            console.log('choiceData: ' + choiceData)
+            if(choiceData) updateUrlObjValue('lenstype', choiceData)
+            increment();
+            
+            setScreenId('screen4');
+           
+        }
         return html`
-        <div>screen3.2</div>`
+        <${headerText} text="What do you need your glasses for?" style="width: 250px"/>
+        <${choiceButton}  style="margin-top: 32px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+         text="Near Vision" onclick=${()=>{nextPage('6')}}/>
+        <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+         text="Distance Vision" onclick=${()=>{nextPage('6')}}/>
+         <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+         text="Multifocal / Progressive" onclick=${()=>{nextPage('7')}}/>
+        <${bottomLink} func="${()=>{nextPage()}}" text="${"Skip"}"/>`
     }
 
-
+    const screen4 = () =>{
+        console.log(urlObject)
+        return html` <div>screen 4</div>`
+    }
     
     return html`
     ${styles}
