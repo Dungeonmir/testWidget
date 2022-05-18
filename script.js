@@ -372,10 +372,8 @@ const Widget = () => {
         }
 
         .svg-elem-1 {
-        -webkit-animation: animate-svg-stroke-1 2s cubic-bezier(1, 0, 0, 1) 0s both,
-                            animate-svg-fill-1 2s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s both;
-                animation: animate-svg-stroke-1 2s cubic-bezier(1, 0, 0, 1) 0s both,
-                    animate-svg-fill-1 2s cubic-bezier(0.47, 0, 0.745, 0.715) 0.8s both;
+                animation: animate-svg-stroke-1 2s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-1 1.2s cubic-bezier(0.47, 0, 0.745, 0.715)  both;
         }
 
         @-webkit-keyframes animate-svg-stroke-2 {
@@ -423,10 +421,8 @@ const Widget = () => {
         }
 
         .svg-elem-2 {
-        -webkit-animation: animate-svg-stroke-2 2s cubic-bezier(1, 0, 0, 1) 0.12s both,
-                            animate-svg-fill-2 2s cubic-bezier(0.47, 0, 0.745, 0.715) 0.9s both;
-                animation: animate-svg-stroke-2 2s cubic-bezier(1, 0, 0, 1) 0.12s both,
-                    animate-svg-fill-2 2s cubic-bezier(0.47, 0, 0.745, 0.715) 0.9s both;
+                animation: animate-svg-stroke-2 1.88s cubic-bezier(1, 0, 0, 1) both,
+                    animate-svg-fill-2 1.1s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-3 {
@@ -474,10 +470,8 @@ const Widget = () => {
         }
 
         .svg-elem-3 {
-        -webkit-animation: animate-svg-stroke-3 2s cubic-bezier(1, 0, 0, 1) 0.24s both,
-                            animate-svg-fill-3 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1s both;
-                animation: animate-svg-stroke-3 2s cubic-bezier(1, 0, 0, 1) 0.24s both,
-                    animate-svg-fill-3 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1s both;
+                animation: animate-svg-stroke-3 1.76s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-3 1s cubic-bezier(0.47, 0, 0.745, 0.715)  both;
         }
 
         @-webkit-keyframes animate-svg-stroke-4 {
@@ -505,10 +499,8 @@ const Widget = () => {
         }
 
         .svg-elem-4 {
-        -webkit-animation: animate-svg-stroke-4 2s cubic-bezier(1, 0, 0, 1) 0.36s both,
-                            animate-svg-fill-4 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.1s both;
-                animation: animate-svg-stroke-4 2s cubic-bezier(1, 0, 0, 1) 0.36s both,
-                    animate-svg-fill-4 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.1s both;
+                animation: animate-svg-stroke-4 1.64s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-4 0.9s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-5 {
@@ -536,10 +528,8 @@ const Widget = () => {
         }
 
         .svg-elem-5 {
-        -webkit-animation: animate-svg-stroke-5 2s cubic-bezier(1, 0, 0, 1) 0.48s both,
-                            animate-svg-fill-5 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.2000000000000002s both;
-                animation: animate-svg-stroke-5 2s cubic-bezier(1, 0, 0, 1) 0.48s both,
-                    animate-svg-fill-5 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.2000000000000002s both;
+                animation: animate-svg-stroke-5 1.52s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-5 0.8s cubic-bezier(0.47, 0, 0.745, 0.715)  both;
         }
 
         @-webkit-keyframes animate-svg-stroke-6 {
@@ -567,10 +557,8 @@ const Widget = () => {
         }
 
         .svg-elem-6 {
-        -webkit-animation: animate-svg-stroke-6 2s cubic-bezier(1, 0, 0, 1) 0.6s both,
-                            animate-svg-fill-6 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.3s both;
-                animation: animate-svg-stroke-6 2s cubic-bezier(1, 0, 0, 1) 0.6s both,
-                    animate-svg-fill-6 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.3s both;
+                animation: animate-svg-stroke-6 1.4s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-6 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-7 {
@@ -598,10 +586,8 @@ const Widget = () => {
         }
 
         .svg-elem-7 {
-        -webkit-animation: animate-svg-stroke-7 2s cubic-bezier(1, 0, 0, 1) 0.72s both,
-                            animate-svg-fill-7 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.4000000000000001s both;
-                animation: animate-svg-stroke-7 2s cubic-bezier(1, 0, 0, 1) 0.72s both,
-                    animate-svg-fill-7 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.4000000000000001s both;
+                animation: animate-svg-stroke-7 1.28s cubic-bezier(1, 0, 0, 1) both,
+                    animate-svg-fill-7 0.6s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-8 {
@@ -629,10 +615,8 @@ const Widget = () => {
         }
 
         .svg-elem-8 {
-        -webkit-animation: animate-svg-stroke-8 2s cubic-bezier(1, 0, 0, 1) 0.84s both,
-                            animate-svg-fill-8 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.5s both;
-                animation: animate-svg-stroke-8 2s cubic-bezier(1, 0, 0, 1) 0.84s both,
-                    animate-svg-fill-8 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.5s both;
+                animation: animate-svg-stroke-8 1.16s cubic-bezier(1, 0, 0, 1) both,
+                    animate-svg-fill-8 0.5s cubic-bezier(0.47, 0, 0.745, 0.715)  both;
         }
 
         @-webkit-keyframes animate-svg-stroke-9 {
@@ -660,10 +644,8 @@ const Widget = () => {
         }
 
         .svg-elem-9 {
-        -webkit-animation: animate-svg-stroke-9 2s cubic-bezier(1, 0, 0, 1) 0.96s both,
-                            animate-svg-fill-9 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.6s both;
-                animation: animate-svg-stroke-9 2s cubic-bezier(1, 0, 0, 1) 0.96s both,
-                    animate-svg-fill-9 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.6s both;
+                animation: animate-svg-stroke-9 1.04s cubic-bezier(1, 0, 0, 1) both,
+                    animate-svg-fill-9 0.4s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-10 {
@@ -691,10 +673,8 @@ const Widget = () => {
         }
 
         .svg-elem-10 {
-        -webkit-animation: animate-svg-stroke-10 2s cubic-bezier(1, 0, 0, 1) 1.08s both,
-                            animate-svg-fill-10 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7000000000000002s both;
-                animation: animate-svg-stroke-10 2s cubic-bezier(1, 0, 0, 1) 1.08s both,
-                    animate-svg-fill-10 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7000000000000002s both;
+                animation: animate-svg-stroke-10 0.92s cubic-bezier(1, 0, 0, 1)  both,
+                    animate-svg-fill-10 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @-webkit-keyframes animate-svg-stroke-11 {
@@ -722,10 +702,8 @@ const Widget = () => {
         }
 
         .svg-elem-11 {
-        -webkit-animation: animate-svg-stroke-11 2s cubic-bezier(1, 0, 0, 1) 1.2s both,
-                            animate-svg-fill-11 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.8s both;
-                animation: animate-svg-stroke-11 2s cubic-bezier(1, 0, 0, 1) 1.2s both,
-                    animate-svg-fill-11 2s cubic-bezier(0.47, 0, 0.745, 0.715) 1.8s both;
+                animation: animate-svg-stroke-11 0.8s cubic-bezier(1, 0, 0, 1) both,
+                    animate-svg-fill-11 0.2s cubic-bezier(0.47, 0, 0.745, 0.715) both;
         }
 
         @keyframes fadeOut {
@@ -738,7 +716,7 @@ const Widget = () => {
         }
     }
         .anim2s{
-            animation: fadeOut 1.5s cubic-bezier(1, 0, 0, 1) 1.2s both;
+            animation: fadeOut 1.5s cubic-bezier(1, 0, 0, 1)  both;
         }
 
 
@@ -844,7 +822,7 @@ const Widget = () => {
       }
 
     
-    const choiceButton = ({imgSource, text, style, onclick, imgHeight}) =>{
+    const choiceButton = ({imgSource, text, style, onclick, imgHeight, text2}) =>{
         const image = ()=>{
             return html`<img style="height: ${imgHeight};" alt="${text}" src="${imgSource}" />`
         }
@@ -852,6 +830,7 @@ const Widget = () => {
             <div class="choiceBtn link" style="${style}" onClick="${onclick}">
                 ${(()=>{return imgSource && html`<${image}/>`})()}                    
                 <p>${text}</p>
+                ${(()=>{return text2 && html`<p style="font-weight: 700; font-size: 18px; line-height: 25px; color: #0F0F0F;">${text2}</p>`})()}  
             </div>
         `;
       }
@@ -904,7 +883,7 @@ const Widget = () => {
     
     // Screen container
     const main = ()=>{
-        const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4 }
+        const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,screen4_2, screen5 }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -913,6 +892,7 @@ const Widget = () => {
     // Screen 1
     const screen1 = ()=>{
         const nextPage = () =>{
+            updateUrlObjValue('gender', '')
             increment();
             setScreenId('screen2');
         }
@@ -929,6 +909,7 @@ const Widget = () => {
     // Screen 2
     const screen2 = ()=>{
         const nextPage = () =>{
+            updateUrlObjValue('eyewear_type', '');
             increment();
             setScreenId('screen2to3')
         }
@@ -947,9 +928,11 @@ const Widget = () => {
         
         return html`
         <${headerText} text="What type of glasses are you looking for?" style="width: 250px"/>
-        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 138px;" imgSource="${imgEyeglasses}" imgHeight="20.23px"}} 
+        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 138px;" 
+        imgSource="${imgEyeglasses}" imgHeight="20.23px"
          text="Eyeglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '210'); nextPage()}}/>
-        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${imgSunglasses}" imgHeight="20.23px"}} 
+        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" 
+        imgSource="${imgSunglasses}" imgHeight="20.23px" 
          text="Sunglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '211'); nextPage()}}/>
         <${bottomLink} func="${()=>{nextPage()}}" text="${"I want to see both"}"/>`
 
@@ -958,7 +941,7 @@ const Widget = () => {
 
     const screen2to3 = ()=>{        
         //Changed timeout to 3.5s for future fade out transition
-        setTimeout(()=>setScreenId('screen3'), '3500')
+        setTimeout(()=>setScreenId('screen3'), '2000')
         return html`
         <${like}/>
         <p class="blueText anim2s">Let's get to know you!</p>`
@@ -973,10 +956,10 @@ const Widget = () => {
             setScreenId('screen4');
         }
         return html`
-        <${headerText} text="Do you need vision correction?" style="width: 250px"/>
-        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 120px;" imgHeight="20.23px"}} 
+        <${headerText} text="Do you need vision correction?"/>
+        <${choiceButton}  style="margin-top: 32px; width: 274px; height: 120px;" imgHeight="20.23px"
          text="Yes" onclick=${()=>{setScreenId('screen3_2')}}/>
-        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 120px;" imgHeight="20.23px"}} 
+        <${choiceButton}  style="margin-top: 14px; width: 274px; height: 120px;" imgHeight="20.23px"
          text="No" onclick=${()=>{nextPage()}}/>
         <${bottomLink} func="${()=>{nextPage()}}" text="${"Skip"}"/>`
     }
@@ -985,8 +968,7 @@ const Widget = () => {
     // Screen 3.2
     const screen3_2 = ()=>{
         const nextPage = (choiceData)=>{
-            console.log('choiceData: ' + choiceData)
-            if(choiceData) updateUrlObjValue('lenstype', choiceData)
+            choiceData? updateUrlObjValue('lenstype', choiceData) : updateUrlObjValue('lenstype', '')
             increment();
             
             setScreenId('screen4');
@@ -994,19 +976,68 @@ const Widget = () => {
         }
         return html`
         <${headerText} text="What do you need your glasses for?" style="width: 250px"/>
-        <${choiceButton}  style="margin-top: 32px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+        <${choiceButton}  style="margin-top: 32px; width: 294px; height: 84px;" imgHeight="20.23px"
          text="Near Vision" onclick=${()=>{nextPage('6')}}/>
-        <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+        <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"
          text="Distance Vision" onclick=${()=>{nextPage('6')}}/>
-         <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"}} 
+         <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"
          text="Multifocal / Progressive" onclick=${()=>{nextPage('7')}}/>
         <${bottomLink} func="${()=>{nextPage()}}" text="${"Skip"}"/>`
     }
 
     const screen4 = () =>{
-        console.log(urlObject)
-        return html` <div>screen 4</div>`
+        const nextPage = (frame_size)=>{
+            increment();
+            frame_size ? updateUrlObjValue('frame_size', frame_size) : updateUrlObjValue('frame_size', '');
+            setScreenId('screen5');
+        }
+        return html`
+        <${headerText} text="What’s your current frame size?" style="width: 250px"/>
+        <img src="https://svgshare.com/i/hVp.svg" alt="Frame image" style="margin-top: 38px;"/>
+        <${choiceButton}  style="margin-top: 35px; width: 318px; height: 56px;
+        display: flex;flex-direction: row;justify-content: space-around;align-items: center;"
+         text="Small" text2="42-48 mm" onclick=${()=>{nextPage('68')}}/>
+        <${choiceButton}  style="margin-top: 12px; width: 318px; height: 56px;
+        display: flex;flex-direction: row;justify-content: space-around;align-items: center;"
+         text="Medium" text2="49-53 mm" onclick=${()=>{nextPage('67')}}/>
+         <${choiceButton}  style="margin-top: 12px; width: 318px; height: 56px;
+         display: flex;flex-direction: row;justify-content: space-around;align-items: center;"
+         text="Large" text2="54-58 mm" onclick=${()=>{nextPage('66')}}/>
+        <${bottomLink} func="${()=>{setScreenId('screen4to4_2')}}" text="${"I don’t know"}"/>`
     }
+
+
+    const screen4to4_2 = ()=>{
+        setTimeout(()=>setScreenId('screen4_2'), '2000')
+        return html`
+        <${like}/>
+        <p class="blueText anim2s">No worries, we’ve got you!</p>`
+    }
+
+    const screen4_2 = ()=>{
+        const nextPage = (frame_size)=>{
+            increment();
+            frame_size? updateUrlObjValue('frame_size', frame_size):updateUrlObjValue('frame_size', '');
+            console.log(frame_size)
+            setScreenId('screen5');
+        }
+        return html`
+        <${headerText} text="How wide would you say your face is?" style="width: 250px"/>
+        <${choiceButton}  style="margin-top: 32px; width: 304px; height: 84px;" imgHeight="20.23px"
+         text="Wider Than Average" onclick=${()=>{nextPage('66')}}/>
+        <${choiceButton}  style="margin-top: 11px; width: 294px; height: 84px;" imgHeight="20.23px"
+         text="Average" onclick=${()=>{nextPage('67')}}/>
+         <${choiceButton}  style="margin-top: 11px; width: 294px; height: 84px;" imgHeight="20.23px"
+         text="Narrower Than Average" onclick=${()=>{nextPage('68')}}/>
+        <${bottomLink} func="${()=>{nextPage()}}" text="${"I’m not sure"}"/>`
+    }
+
+
+    const screen5 = ()=>{
+        console.log(urlObject);
+        return html`<p>This is screen5</p>`
+    }
+
     
     return html`
     ${styles}
