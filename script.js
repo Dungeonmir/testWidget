@@ -822,14 +822,16 @@ const Widget = () => {
       }
 
     
-    const choiceButton = ({imgSource, text, style, onclick, imgHeight, text2}) =>{
+    const choiceButton = ({imgSource, text, style, onclick, imgHeight, text2, imgSource2, textStyle}) =>{
         const image = ()=>{
             return html`<img style="height: ${imgHeight};" alt="${text}" src="${imgSource}" />`
         }
+        
         return html`
             <div class="choiceBtn link" style="${style}" onClick="${onclick}">
-                ${(()=>{return imgSource && html`<${image}/>`})()}                    
-                <p>${text}</p>
+                ${(()=>{return imgSource && html`<${image}/>`})()}    
+                ${(()=>{return imgSource2 && html`<img src="${imgSource2}"/>`})()}                 
+                <p style="${textStyle}">${text}</p>
                 ${(()=>{return text2 && html`<p style="font-weight: 700; font-size: 18px; line-height: 25px; color: #0F0F0F;">${text2}</p>`})()}  
             </div>
         `;
@@ -883,7 +885,8 @@ const Widget = () => {
     
     // Screen container
     const main = ()=>{
-        const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,screen4_2, screen5 }
+        const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,
+                        screen4_2, screen5_eyeglasses, screen5_sunglasses, screen6 }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -892,7 +895,6 @@ const Widget = () => {
     // Screen 1
     const screen1 = ()=>{
         const nextPage = () =>{
-            updateUrlObjValue('gender', '')
             increment();
             setScreenId('screen2');
         }
@@ -909,7 +911,6 @@ const Widget = () => {
     // Screen 2
     const screen2 = ()=>{
         const nextPage = () =>{
-            updateUrlObjValue('eyewear_type', '');
             increment();
             setScreenId('screen2to3')
         }
@@ -989,7 +990,7 @@ const Widget = () => {
         const nextPage = (frame_size)=>{
             increment();
             frame_size ? updateUrlObjValue('frame_size', frame_size) : updateUrlObjValue('frame_size', '');
-            setScreenId('screen5');
+            toScreen5();
         }
         return html`
         <${headerText} text="What’s your current frame size?" style="width: 250px"/>
@@ -1019,7 +1020,7 @@ const Widget = () => {
             increment();
             frame_size? updateUrlObjValue('frame_size', frame_size):updateUrlObjValue('frame_size', '');
             console.log(frame_size)
-            setScreenId('screen5');
+            toScreen5();
         }
         return html`
         <${headerText} text="How wide would you say your face is?" style="width: 250px"/>
@@ -1032,11 +1033,62 @@ const Widget = () => {
         <${bottomLink} func="${()=>{nextPage()}}" text="${"I’m not sure"}"/>`
     }
 
-
-    const screen5 = ()=>{
-        console.log(urlObject);
-        return html`<p>This is screen5</p>`
+    const toScreen5 = ()=>{
+        urlObject.eyewear_type=='211'     ? 
+        setScreenId('screen5_sunglasses') : 
+        setScreenId('screen5_eyeglasses')
     }
+
+    const screen5_eyeglasses = ()=>{
+        const nextPage = (data)=>{
+            updateUrlObjValue('blue_light', data);
+            increment();
+            setScreenId('screen6');
+        }
+        return html`
+        <${headerText} text="Would you like to protect your eyes 
+        from light emanating from screens?" style="width: 330px"/>
+        <${choiceButton}  style="margin-top: 32px; width: 273px; height: 138px;"
+         text="Yes" onclick=${()=>{nextPage('true')}}/>
+        <${choiceButton}  style="margin-top: 14px; width: 273px; height: 138px;" 
+         text="No" onclick=${()=>{nextPage('false')}}/>
+        `
+    }
+
+
+    const screen5_sunglasses = ()=>{ 
+        const nextPage = (data)=>{
+            increment();
+            updateUrlObjValue('shade', data)
+            setScreenId('screen6');
+        }
+
+        const btnStyle = `margin-top: 32px; width: 304px; height: 89px; display: flex; 
+        flex-direction: row; justify-content: space-around; align-items: center;`
+
+        const textStyle = `width: 176.61px; text-align: left`;
+        const rectagleSource = 'https://svgshare.com/i/hZv.svg'
+
+
+        return html`
+        
+        <${headerText} text="When you’re out and about, which shade of lenses do you prefer?" 
+        style="width: 312px"/>
+        <${choiceButton}  style="${btnStyle}" imgSource="${'https://svgshare.com/i/hZ3.svg'}" imgSource2="${rectagleSource}"
+         text="Dark Shade" onclick=${()=>{nextPage('dark')}} textStyle="${textStyle}"/>
+        <${choiceButton}  style="${btnStyle}"  imgSource="${'https://svgshare.com/i/hZe.svg'}" imgSource2="${rectagleSource}"
+         text="Light Shade" onclick=${()=>{nextPage('light')}} textStyle="${textStyle}"/>
+         <${choiceButton} style="${btnStyle}"  imgSource="${'https://svgshare.com/i/h_7.svg'}" imgSource2="${rectagleSource}"
+         text="Transitioning Shade" onclick=${()=>{nextPage('transition')}} textStyle="${textStyle}"/>
+        `
+    }
+
+    
+    const screen6 = ()=>{
+        console.log(urlObject);
+        return html`<p>This is screen 6 </p>`
+    }
+    
 
     
     return html`
