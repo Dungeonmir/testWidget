@@ -104,7 +104,7 @@ const Widget = () => {
             align-items: center;
         }
         .screen0 > .header{
-            width: 350px;
+            width: 375px;
             height: 66px;
             background: #FFFFFF;
             box-shadow: 0px 1px 7px rgba(58, 72, 80, 0.07);
@@ -132,7 +132,7 @@ const Widget = () => {
         }
         .arrow_right{
             cursor: pointer;
-            width: 50px;
+            width: 60px;
             height: 66px;
             display: flex;
             flex-direction: column;
@@ -886,7 +886,7 @@ const Widget = () => {
     // Screen container
     const main = ()=>{
         const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,
-                        screen4_2, screen5_eyeglasses, screen5_sunglasses, screen6 }
+                        screen4_2, screen5,screen5_eyeglasses, screen5_sunglasses, screen6, screen7 }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -904,7 +904,7 @@ const Widget = () => {
          text="Women's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); nextPage()}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
          text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); nextPage()}}/>
-        <${bottomLink} func="${()=>{nextPage()}}" text="${"I'd like to see both"}"/>`
+        <${bottomLink} func="${()=>{updateUrlObjValue('gender', '');nextPage()}}" text="${"I'd like to see both"}"/>`
     }
 
 
@@ -990,7 +990,7 @@ const Widget = () => {
         const nextPage = (frame_size)=>{
             increment();
             frame_size ? updateUrlObjValue('frame_size', frame_size) : updateUrlObjValue('frame_size', '');
-            toScreen5();
+            setScreenId('screen5');
         }
         return html`
         <${headerText} text="What’s your current frame size?" style="width: 250px"/>
@@ -1018,9 +1018,11 @@ const Widget = () => {
     const screen4_2 = ()=>{
         const nextPage = (frame_size)=>{
             increment();
-            frame_size? updateUrlObjValue('frame_size', frame_size):updateUrlObjValue('frame_size', '');
+            frame_size? 
+            updateUrlObjValue('frame_size', frame_size):
+            updateUrlObjValue('frame_size', '');
             console.log(frame_size)
-            toScreen5();
+            setScreenId('screen5');
         }
         return html`
         <${headerText} text="How wide would you say your face is?" style="width: 250px"/>
@@ -1033,7 +1035,13 @@ const Widget = () => {
         <${bottomLink} func="${()=>{nextPage()}}" text="${"I’m not sure"}"/>`
     }
 
-    const toScreen5 = ()=>{
+
+    /*const printCounter = ()=>{
+        console.log('counter:' + counter);
+    }*/
+
+
+    const screen5 = ()=>{
         urlObject.eyewear_type=='211'     ? 
         setScreenId('screen5_sunglasses') : 
         setScreenId('screen5_eyeglasses')
@@ -1057,13 +1065,14 @@ const Widget = () => {
 
 
     const screen5_sunglasses = ()=>{ 
+       
         const nextPage = (data)=>{
             increment();
             updateUrlObjValue('shade', data)
             setScreenId('screen6');
         }
 
-        const btnStyle = `margin-top: 32px; width: 304px; height: 89px; display: flex; 
+        const btnStyle = `width: 304px; height: 89px; display: flex; 
         flex-direction: row; justify-content: space-around; align-items: center;`
 
         const textStyle = `width: 176.61px; text-align: left`;
@@ -1074,21 +1083,55 @@ const Widget = () => {
         
         <${headerText} text="When you’re out and about, which shade of lenses do you prefer?" 
         style="width: 312px"/>
-        <${choiceButton}  style="${btnStyle}" imgSource="${'https://svgshare.com/i/hZ3.svg'}" imgSource2="${rectagleSource}"
+        <${choiceButton}  style="${btnStyle}margin-top: 32px;" imgSource="${'https://svgshare.com/i/hZ3.svg'}" imgSource2="${rectagleSource}"
          text="Dark Shade" onclick=${()=>{nextPage('dark')}} textStyle="${textStyle}"/>
-        <${choiceButton}  style="${btnStyle}"  imgSource="${'https://svgshare.com/i/hZe.svg'}" imgSource2="${rectagleSource}"
+        <${choiceButton}  style="${btnStyle}margin-top: 16px;"  imgSource="${'https://svgshare.com/i/hZe.svg'}" imgSource2="${rectagleSource}"
          text="Light Shade" onclick=${()=>{nextPage('light')}} textStyle="${textStyle}"/>
-         <${choiceButton} style="${btnStyle}"  imgSource="${'https://svgshare.com/i/h_7.svg'}" imgSource2="${rectagleSource}"
+         <${choiceButton} style="${btnStyle}margin-top: 16px;"  imgSource="${'https://svgshare.com/i/h_7.svg'}" imgSource2="${rectagleSource}"
          text="Transitioning Shade" onclick=${()=>{nextPage('transition')}} textStyle="${textStyle}"/>
         `
     }
 
     
-    const screen6 = ()=>{
-        console.log(urlObject);
-        return html`<p>This is screen 6 </p>`
+    const screen6 = ()=>{    
+        const nextPage = (data)=>{
+            increment();
+            updateUrlObjValue('face_shape', data)
+            setScreenId('screen7');
+        }    
+        const imgGender = {
+            '4': 'https://svgshare.com/i/hag.svg',
+            '5': 'https://svgshare.com/i/ha3.svg',
+            '' : "https://svgshare.com/i/haX.svg"
+        }
+        const btnStyle = `width: 314px; height: 89px; display: flex; 
+        flex-direction: row; justify-content: space-around; align-items: center;`
+
+        const textStyle = `width: 176.61px; text-align: left`;
+        const rectagleSource = 'https://svgshare.com/i/hZv.svg'
+
+
+        return html`
+        
+        <${headerText} text="Every face shape has a perfect fit. What’s yours?" 
+        style="width: 240px"/>
+        <${choiceButton}  style="${btnStyle} margin-top: 32px;" 
+        imgSource="${imgGender[urlObject.gender]}" imgSource2="${rectagleSource}"
+         text="I have a long face" onclick=${()=>{nextPage('long')}} textStyle="${textStyle}"/>
+        <${choiceButton}  style="${btnStyle} margin-top: 14px;"  
+        imgSource="${imgGender[urlObject.gender]}" imgSource2="${rectagleSource}"
+         text="I have a round face" onclick=${()=>{nextPage('round')}} textStyle="${textStyle}"/>
+         <${choiceButton} style="${btnStyle}margin-top: 14px;"  
+         imgSource="${imgGender[urlObject.gender]}" imgSource2="${rectagleSource}"
+         text="In between" onclick=${()=>{nextPage('between')}} textStyle="${textStyle}"/>
+         `
     }
     
+
+    const screen7 = ()=>{
+        console.log(urlObject);
+        return html`<p>This is screen 7 </p>`
+    }
 
     
     return html`
