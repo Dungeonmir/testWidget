@@ -886,7 +886,8 @@ const Widget = () => {
     // Screen container
     const main = ()=>{
         const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,
-                        screen4_2, screen5,screen5_eyeglasses, screen5_sunglasses, screen6, screen7 }
+                        screen4_2, screen5,screen5_eyeglasses, screen5_sunglasses, screen6, 
+                        screen7, screen8, }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -1128,8 +1129,26 @@ const Widget = () => {
     
 
     const screen7 = ()=>{
-        console.log(urlObject);
-        return html`<p>This is screen 7 </p>`
+        const nextPage = (data)=>{
+            increment();
+            updateUrlObjValue('facial_features', data)
+            setScreenId('screen8');
+        }  
+        const btnStyle = `width: 314px; height: 97px;`
+        return html`
+        <${headerText} text="How would you define your facial features?" style="width: 240px"/>
+        <${choiceButton}  style="${btnStyle} margin-top: 32px;"
+         text="Sharp" onclick=${()=>{nextPage('sharp')}}/>
+        <${choiceButton}  style="${btnStyle} margin-top: 14px;"
+         text="Rounded" onclick=${()=>{nextPage('rounded')}}/>
+         <${choiceButton}  style="${btnStyle} margin-top: 14px;"
+         text="In between" onclick=${()=>{nextPage('between')}}/>
+        <${bottomLink} func="${()=>{nextPage('')}}" text="${"I don’t know"}"/>
+        `
+    }
+    const screen8 = ()=>{
+        console.log(urlObject)
+        return html`<p>screen 8</p>`
     }
 
     
