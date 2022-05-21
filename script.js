@@ -894,23 +894,25 @@ const Widget = () => {
     
     // Screen 1
     const screen1 = ()=>{
-        const nextPage = () =>{
+        const nextPage = (data) =>{
+            updateUrlObjValue('gender', data);
             increment();
             setScreenId('screen2');
         }
         return html`
         <${headerText} text="You are looking for"/>
         <${choiceButton}  style="margin-top: 24px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJc.svg'}" imgHeight="43.18px"}} 
-         text="Women's Styles" onclick=${()=>{updateUrlObjValue('gender', '5'); nextPage()}}/>
+         text="Women's Styles" onclick=${()=>{nextPage('5')}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" imgSource="${'https://svgshare.com/i/hJb.svg'}" imgHeight="43.18px"}} 
-         text="Men's Styles" onclick=${()=>{updateUrlObjValue('gender', '4'); nextPage()}}/>
-        <${bottomLink} func="${()=>{updateUrlObjValue('gender', '');nextPage()}}" text="${"I'd like to see both"}"/>`
+         text="Men's Styles" onclick=${()=>{nextPage('4')}}/>
+        <${bottomLink} func="${()=>{nextPage('')}}" text="${"I'd like to see both"}"/>`
     }
 
 
     // Screen 2
     const screen2 = ()=>{
-        const nextPage = () =>{
+        const nextPage = (data) =>{
+            updateUrlObjValue('eyewear_type', data);
             increment();
             setScreenId('screen2to3')
         }
@@ -931,11 +933,11 @@ const Widget = () => {
         <${headerText} text="What type of glasses are you looking for?" style="width: 250px"/>
         <${choiceButton}  style="margin-top: 32px; width: 274px; height: 138px;" 
         imgSource="${imgEyeglasses}" imgHeight="20.23px"
-         text="Eyeglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '210'); nextPage()}}/>
+         text="Eyeglasses" onclick=${()=>{nextPage('210')}}/>
         <${choiceButton}  style="margin-top: 14px; width: 274px; height: 138px;" 
         imgSource="${imgSunglasses}" imgHeight="20.23px" 
-         text="Sunglasses" onclick=${()=>{updateUrlObjValue('eyewear_type', '211'); nextPage()}}/>
-        <${bottomLink} func="${()=>{nextPage()}}" text="${"I want to see both"}"/>`
+         text="Sunglasses" onclick=${()=>{nextPage('211')}}/>
+        <${bottomLink} func="${()=>{nextPage('')}}" text="${"I want to see both"}"/>`
 
     }
 
@@ -968,10 +970,9 @@ const Widget = () => {
 
     // Screen 3.2
     const screen3_2 = ()=>{
-        const nextPage = (choiceData)=>{
-            choiceData? updateUrlObjValue('lenstype', choiceData) : updateUrlObjValue('lenstype', '')
+        const nextPage = (data)=>{
+            updateUrlObjValue('lenstype', data)
             increment();
-            
             setScreenId('screen4');
            
         }
@@ -983,13 +984,13 @@ const Widget = () => {
          text="Distance Vision" onclick=${()=>{nextPage('6')}}/>
          <${choiceButton}  style="margin-top: 14px; width: 294px; height: 84px;" imgHeight="20.23px"
          text="Multifocal / Progressive" onclick=${()=>{nextPage('7')}}/>
-        <${bottomLink} func="${()=>{nextPage()}}" text="${"Skip"}"/>`
+        <${bottomLink} func="${()=>{nextPage('')}}" text="${"Skip"}"/>`
     }
 
     const screen4 = () =>{
-        const nextPage = (frame_size)=>{
+        const nextPage = (data)=>{
             increment();
-            frame_size ? updateUrlObjValue('frame_size', frame_size) : updateUrlObjValue('frame_size', '');
+            updateUrlObjValue('frame_size', data)
             setScreenId('screen5');
         }
         return html`
@@ -1004,7 +1005,7 @@ const Widget = () => {
          <${choiceButton}  style="margin-top: 12px; width: 318px; height: 56px;
          display: flex;flex-direction: row;justify-content: space-around;align-items: center;"
          text="Large" text2="54-58 mm" onclick=${()=>{nextPage('66')}}/>
-        <${bottomLink} func="${()=>{setScreenId('screen4to4_2')}}" text="${"I don’t know"}"/>`
+        <${bottomLink} func="${()=>{updateUrlObjValue('frame_size', '');setScreenId('screen4to4_2')}}" text="${"I don’t know"}"/>`
     }
 
 
@@ -1016,12 +1017,9 @@ const Widget = () => {
     }
 
     const screen4_2 = ()=>{
-        const nextPage = (frame_size)=>{
-            increment();
-            frame_size? 
-            updateUrlObjValue('frame_size', frame_size):
-            updateUrlObjValue('frame_size', '');
-            console.log(frame_size)
+        const nextPage = (data)=>{
+            increment()
+            updateUrlObjValue('frame_size', data)
             setScreenId('screen5');
         }
         return html`
@@ -1032,7 +1030,7 @@ const Widget = () => {
          text="Average" onclick=${()=>{nextPage('67')}}/>
          <${choiceButton}  style="margin-top: 11px; width: 294px; height: 84px;" imgHeight="20.23px"
          text="Narrower Than Average" onclick=${()=>{nextPage('68')}}/>
-        <${bottomLink} func="${()=>{nextPage()}}" text="${"I’m not sure"}"/>`
+        <${bottomLink} func="${()=>{nextPage('')}}" text="${"I’m not sure"}"/>`
     }
 
 
@@ -1124,6 +1122,7 @@ const Widget = () => {
          <${choiceButton} style="${btnStyle}margin-top: 14px;"  
          imgSource="${imgGender[urlObject.gender]}" imgSource2="${rectagleSource}"
          text="In between" onclick=${()=>{nextPage('between')}} textStyle="${textStyle}"/>
+         <${bottomLink} func="${()=>{nextPage('')}}" text="${"I don’t know"}"/>
          `
     }
     
