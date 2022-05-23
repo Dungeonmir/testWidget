@@ -2,6 +2,7 @@ import { h, render } from 'https://unpkg.com/preact@latest?module';
 import { useState, useCallback, useEffect } from 'https://unpkg.com/preact@latest/hooks/dist/hooks.module.js?module';
 import htm from "https://unpkg.com/htm@latest/dist/htm.module.js?module";
 
+
 const html = htm.bind(h);
 
 
@@ -121,7 +122,12 @@ const Widget = () => {
             align-items: center;
             justify-content: center;
         }
+        #glasses-quiz-widget{
+            overflow: hidden;
+            user-select: none;
+        }
         #glasses-quiz-widget > .main{
+            
             position: relative;
             width:375px;
             height: 572px;
@@ -191,11 +197,15 @@ const Widget = () => {
             text-align: center;
             color: #3A4850;
         }
-        .btnBlue{
+        .startNow{
             position: absolute;
 	        bottom: 122px;
             height: 48px;
             width: 177px;
+        }
+        .btnBlue{
+            height: 48px;
+            width: 181px;
             border-radius: 24px;
             border: 0px;
             background: linear-gradient(270deg, #45C7FA 0%, #2196F3 100%);
@@ -248,6 +258,33 @@ const Widget = () => {
             line-height: 29px;
             text-align: center;
             color: #0F0F0F;
+        }
+        .subtitleText{
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
+            color: #697580;
+            margin-top: 10px; 
+        }
+        .choiceContainer{
+            cursor: grab;
+            width: 375px;
+            overflow-x: scroll;
+        }
+        .choiceMenu{
+            width:  679.5px;
+            height:337.36px;
+            margin: 10px 12px;
+        }
+        .choiceContainer {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .choiceContainer::-webkit-scrollbar { 
+            display: none;  /* Safari and Chrome */
         }
         .inlineFlex{
             display: flex;
@@ -311,6 +348,21 @@ const Widget = () => {
             /* identical to box height */
             text-align: center;
             color: #425A60;
+        }
+        .choiceItemClicked{
+            position: relative;
+            border: 1px solid #45C9FF;
+        }
+        .choiceItemClicked::after{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            content: '';
+            float: right;
+            z-index:2;
+            right: -7px;
+            top: -7px;
+            background-image: url('https://svgshare.com/i/hem.svg');
         }
         @media only screen and (min-width: 700px) {
             .screen0 .main{
@@ -722,7 +774,6 @@ const Widget = () => {
 
     </style>`
 
-
     const {counter, counterPrev, increment, decrement, startOver} = useCounter()
     const {urlObject, updateUrlObjValue} = useUrl()
     const {screenId, setScreenId} = useScreenId()
@@ -750,10 +801,10 @@ const Widget = () => {
         // Start now button
         const main = ()=>{
             return html`<div class="main">
-            <img class="glassesImg" src="https://svgshare.com/i/hJo.svg"/>
+            <img class="glassesImg" src="https://i.ibb.co/HxpPzyT/glasses-Main.png" height="153" width="312"/>
             <p class="blueText">Let’s find your perfect pair!</p>
             <p class="blackText">Take the quiz to easily discover your perfect fit from thousands of styles</p>
-            <button class="btnBlue link" onclick="${nextPage}">Start now</button>
+            <button class="btnBlue link startNow" onclick="${nextPage}">Start now</button>
             </div>`
         }
 
@@ -780,9 +831,9 @@ const Widget = () => {
             }
             return html`
             <div class="upbar_header">
-                <div class="btnBack inlineFlex scale" onclick="${previousPage}"><img src="https://svgshare.com/i/hLt.svg"/></div> 
+                <div class="btnBack inlineFlex scale link" onclick="${previousPage}"><img src="https://svgshare.com/i/hLt.svg"/></div> 
                 <p class="">${counter}/10</p>
-                <div class="btnExit inlineFlex scale" onclick="${startOver}"><img src="https://svgshare.com/i/hLZ.svg"/></div>        
+                <div class="btnExit inlineFlex scale link" onclick="${startOver}"><img src="https://svgshare.com/i/hLZ.svg"/></div>        
             </div>`
     }
 
@@ -820,6 +871,74 @@ const Widget = () => {
           <p>${text}</p>
         </div>`
       }
+    
+
+    const subtitleText = ({text, style}) =>{
+        return html`<div class="subtitleText" style="${style}">
+          <p>${text}</p>
+        </div>`
+      }
+
+    const choiceMenu = ({choiceCards, style})=>{
+        
+        useEffect(()=>{   
+            slider();
+            makeSelection();
+            })
+            const makeSelection = ()=>{
+                let menu = document.querySelector('.choiceMenu');
+                for (let i = 0; i < menu.children.length; i++) {
+                    let option = menu.children.item(i)
+                    option.addEventListener(
+                       'click', ()=>{
+                            option.classList.contains('choiceItemClicked')?
+                            option.classList.remove('choiceItemClicked'):
+                            option.classList.add('choiceItemClicked');
+                        }
+                    )
+                    
+                }
+            }
+            const slider = ()=>{
+                const slider = document.querySelector('.choiceContainer');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            
+            });
+            slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            });
+            slider.addEventListener('mouseup', () => {
+            isDown = false;
+            });
+            slider.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const scroll = (x - startX) * 2; //scroll-fast
+            slider.scrollLeft = scrollLeft - scroll;
+            });
+            }
+        return html`
+        <div class="choiceContainer">
+            <div class="choiceMenu" style="${style}" >
+                ${choiceCards.map((card)=>{
+                    return html`
+                    <${choiceButton} imgSource="${card.img}" imgHeight="${card.imgHeight}" text="${card.text}"
+                    style="${card.style}" onclick="${card.onclick}"/>
+                    `
+                })}
+            </div>
+        </div>
+
+        `
+    }
 
     
     const choiceButton = ({imgSource, text, style, onclick, imgHeight, text2, imgSource2, textStyle}) =>{
@@ -844,6 +963,9 @@ const Widget = () => {
           <p onclick=${()=>{func()}}>${text}</p>
         </div>`;
     } 
+
+
+    
 
 
     // Like hand icon svg
@@ -887,7 +1009,7 @@ const Widget = () => {
     const main = ()=>{
         const screens = {screen1,screen2, screen2to3, screen3, screen3_2, screen4, screen4to4_2,
                         screen4_2, screen5,screen5_eyeglasses, screen5_sunglasses, screen6, 
-                        screen7, screen8, }
+                        screen7, screen8, screen9, screen10 }
         return html`
         <div class="main"><${screens[screenId]}/></div>`
     }
@@ -1146,11 +1268,138 @@ const Widget = () => {
         <${bottomLink} func="${()=>{nextPage('')}}" text="${"I don’t know"}"/>
         `
     }
-    const screen8 = ()=>{
-        console.log(urlObject)
-        return html`<p>screen 8</p>`
+
+
+    let items = []
+    const addItem=(value)=>{
+        let itemUnique =true;
+        items = items.filter((item)=>{
+            if(item==value)itemUnique=false
+            return item!=value
+        })
+        if (itemUnique) {
+            items.push(value)
+        }
+        let btn = document.querySelector('.btnBlue');        
+        btn.style.background = items.length==0?'#DEDEDE':'linear-gradient(270deg, #45C7FA 0%, #2196F3 100%)'
+        console.log(items)
     }
 
+
+    const screen8 = ()=>{
+        const menuStyle =  `display: flex; flex-direction: row; flex-wrap: wrap;justify-content: center; align-items: center; gap: 10px`
+        const cardStyle = `width: 159.74px;height: 102.9px;font-size: 13.72px;line-height: 14px;
+        box-shadow: 0px 1px 0px rgba(58, 72, 80, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08);
+        border-radius: 13.72px; justify-content: flex-start;
+        `
+        
+        const cards=[
+            {
+                text: "Rectangle",
+                img: "https://svgshare.com/i/hbK.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('rectangle')},
+                imgHeight: "64.19"
+            },
+             {
+                text: "Browline",
+                img: "https://svgshare.com/i/haG.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('browline')},
+                imgHeight: "64.19"
+            },
+             {
+                text: "Aviator",
+                img: "https://svgshare.com/i/haH.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('aviator')},
+                imgHeight: "64.19"
+            },
+            {
+                text: "Geometric",
+                img: "https://svgshare.com/i/hdX.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('geometric')},
+                imgHeight: "64.19"
+            },
+             {
+                text: "Wayframe",
+                img: "https://svgshare.com/i/heo.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('wayframe')},
+            },
+             {
+                text: "Round",
+                img: "https://svgshare.com/i/hf7.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('round')},
+            },
+            {
+                text: "Oval",
+                img: "https://svgshare.com/i/hf8.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('oval')},
+                imgHeight: "64.19"
+            },
+             {
+                text: "Oversized",
+                img: "https://svgshare.com/i/hdY.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('oversized')},
+            },
+             {
+                text: "Cat Eye",
+                img: "https://svgshare.com/i/hew.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('cat_eye')},
+            },
+            {
+                text: "Rimless",
+                img: "https://svgshare.com/i/heb.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('rimless')},
+                imgHeight: "64.19"
+            },
+             {
+                text: "Square",
+                img: "https://svgshare.com/i/hdK.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('square')},
+            },
+             {
+                text: "Wrap",
+                img: "https://svgshare.com/i/hd2.svg",
+                style: cardStyle,
+                onclick: ()=>{addItem('wrap')},
+            },
+        ]
+
+        const continueClicked = ()=>{
+            if(!items.length==0){
+                updateUrlObjValue('shape', items.join(','));
+                increment();
+                setScreenId('screen9');
+            }
+           
+        }
+
+        return html`
+        <${headerText} text="Which frame style are you looking for?" style="width: 341px"/>
+        <${subtitleText} text="You can pick more than one."/>
+        <${choiceMenu} choiceCards="${cards}" style="${menuStyle}"/>
+        <button class="link btnBlue"  onclick="${continueClicked}" style="margin-top: 25px;background:#DEDEDE;">Continue</button>
+        `
+    }
+
+
+    const screen9 = ()=>{
+        console.log(urlObject)
+    }
+
+
+    const screen10 = ()=>{
+
+    }
     
     return html`
     ${styles}
