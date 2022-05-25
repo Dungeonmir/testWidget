@@ -1559,7 +1559,7 @@ const Widget = () => {
     
             const continueClicked = ()=>{
                 if(!items.length==0){
-                    updateUrlObjValue('shape', items.join(','));
+                    updateUrlObjValue('brand', items.join(','));
                     items=[];
                     increment();
                     setScreenId('screen9');
@@ -1632,8 +1632,7 @@ const Widget = () => {
                     }
                 }
                 string = string.slice(0, -1);
-                let url = "URL: [" + string+"]"
-                console.log(url);
+                console.log(string);
             }
             return html`
             <div class="main fadeOut">
