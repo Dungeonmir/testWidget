@@ -66,16 +66,74 @@ const Widget = () => {
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;600;700&display=swap');
+        root:before {
+        content:
+                url(https://svgshare.com/i/hKp.svg)
+                url(https://svgshare.com/i/hKV.svg)
+                url(https://svgshare.com/i/hem.svg)
+                url(https://gcdnb.pbrd.co/images/TnQguHrp8hEb.png?o=1)
+                url(https://svgshare.com/i/hLt.svg)
+                url(https://svgshare.com/i/hLZ.svg)
+                url(https://svgshare.com/i/hJc.svg)
+                url(https://svgshare.com/i/hJb.svg)
+                url(https://svgshare.com/i/hLG.svg)
+                url(https://svgshare.com/i/hKs.svg)
+                url(https://svgshare.com/i/hMP.svg)
+                url(https://svgshare.com/i/hKi.svg)
+                url(https://svgshare.com/i/hVp.svg)
+                url(https://svgshare.com/i/hZv.svg)
+                url(https://svgshare.com/i/hZ3.svg)
+                url(https://svgshare.com/i/hZe.svg)
+                url(https://svgshare.com/i/h_7.svg)
+                url(https://svgshare.com/i/hag.svg)
+                url(https://svgshare.com/i/ha3.svg)
+                url(https://svgshare.com/i/haX.svg)
+                url(https://svgshare.com/i/hZv.svg)
+                url(https://svgshare.com/i/hbK.svg)
+                url(https://svgshare.com/i/haG.svg)
+                url(https://svgshare.com/i/haH.svg)
+                url(https://svgshare.com/i/hdX.svg)
+                url(https://svgshare.com/i/heo.svg)
+                url(https://svgshare.com/i/hf7.svg)
+                url(https://svgshare.com/i/hf8.svg)
+                url(https://svgshare.com/i/hdY.svg)
+                url(https://svgshare.com/i/hew.svg)
+                url(https://svgshare.com/i/heb.svg)
+                url(https://svgshare.com/i/hdK.svg)
+                url(https://svgshare.com/i/hd2.svg)
+                url(https://svgshare.com/i/hi5.svg)
+                url(https://svgshare.com/i/hic.svg)
+                url(https://svgshare.com/i/hh_.svg)
+                url(https://svgshare.com/i/hgs.svg)
+                url(https://svgshare.com/i/hid.svg)
+                url(https://svgshare.com/i/hiU.svg)
+                url(https://svgshare.com/i/hiV.svg)
+                url(https://svgshare.com/i/hhb.svg)
+                url(https://svgshare.com/i/hie.svg)
+                url(https://svgshare.com/i/hgt.svg)
+                url(https://svgshare.com/i/hiq.svg)
+                url(https://svgshare.com/i/hj7.svg)
+                url(https://svgshare.com/i/hKp.svg)
+                url(https://svgshare.com/i/hLZ.svg)
+                url(https://svgshare.com/i/hhX.svg);
+         
+
+        visibility: hidden;
+        position: absolute;
+        left: -999em;
+        }
+                
         p{
             margin:0;
             padding: 0;
         }
         #glasses-quiz-widget{
-            background: beige;
+            width: max-content;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background: white;
         }
         .link{
             cursor: pointer;
@@ -309,9 +367,6 @@ const Widget = () => {
             transition: .3s;
             transform: scale(1.3)
         }
-        .line{
-            height: 8px;
-        }
         .lineGray{
         position: absolute;
         width: 375px;
@@ -323,7 +378,7 @@ const Widget = () => {
             width: 375px;
             height: 8px;
             background: linear-gradient(290.47deg, #3797FA 11.33%, #45C9FF 83.66%);
-            border-radius: 4px;
+            border-radius: 0px 4px 4px 0px;
             left: -375px;
         }
         .choiceBtn{
@@ -372,8 +427,8 @@ const Widget = () => {
             height: 100%;
             }
             .btnBlue{
-                height: 72px;
-                width: 265px;
+                height: 60px;
+                width: 235px;
                 border-radius: 36px;
                 font-size: 26px;
             }
@@ -772,6 +827,9 @@ const Widget = () => {
         .anim2s{
             animation: fadeOut 1.5s cubic-bezier(1, 0, 0, 1)  both;
         }
+        .fadeOut{
+            animation: fadeOut 0.5s ease-in both;
+        }
 
 
     </style>`
@@ -803,7 +861,7 @@ const Widget = () => {
         // Start now button
         const main = ()=>{
             return html`<div class="main">
-            <img class="glassesImg" src="https://i.ibb.co/HxpPzyT/glasses-Main.png" height="153" width="312"/>
+            <img class="glassesImg" src="https://gcdnb.pbrd.co/images/TnQguHrp8hEb.png?o=1" height="153" width="312"/>
             <p class="blueText">Let’s find your perfect pair!</p>
             <p class="blackText">Take the quiz to easily discover your perfect fit from thousands of styles</p>
             <button class="btnBlue link startNow" onclick="${nextPage}">Start now</button>
@@ -812,7 +870,7 @@ const Widget = () => {
 
 
         return html`
-        <div class="screen0">
+        <div class="screen0 anim2s">
             <${header}/>
             <${main}/>
         </div>`
@@ -1019,7 +1077,7 @@ const Widget = () => {
                         screen4_2, screen5,screen5_eyeglasses, screen5_sunglasses, screen6, 
                         screen7, screen8, screen9, screen10, screen11 }
         return html`
-        <div class="main"><${screens[screenId]}/></div>`
+        <div class="main fadeOut"><${screens[screenId]}/></div>`
     }
 
     
@@ -1544,7 +1602,7 @@ const Widget = () => {
                 line.style.left = '0px'
                 
                 })
-                return html`<div class="line"/>`
+                return html`<div class="lineGray"/><div class="line"/>`
         }
     
     
@@ -1578,8 +1636,8 @@ const Widget = () => {
                 console.log(url);
             }
             return html`
-            <div class="main">
-                <img src="https://svgshare.com/i/hhX.svg" style="margin-top: 38px"/>
+            <div class="main fadeOut">
+                <img class="present anim2s" src="https://svgshare.com/i/hhX.svg" style="margin-top: 38px"/>
                 <p class="blueText" style="width: 314px; font-size: 20px;">We've found some awesome frames for you!</p>
                 <p class="blackText" style="font-size: 16px; line-height: 150%; margin-top: 12px; width: 344px">Send the results to your email to receive special discounts.</p>
                 <button onclick="${send}" class="btnBlue" style="margin-top: 50px">Send</button>
