@@ -13,9 +13,11 @@ function useCounter(){
     const savePrev = ()=>{
         setCounterPrev(counter);
     } 
-    const increment = useCallback(()=>{
+    const increment = useCallback((number)=>{
+        let n = number;
+        n = number==undefined?1:number
         savePrev.call();
-        setCounter(counter+1)
+        setCounter(counter+n)
     }, [counter])
     const decrement = useCallback(()=>{
         savePrev.call();
@@ -782,7 +784,7 @@ const Widget = () => {
     const screen0  = ()=>{
         const nextPage = ()=>{
             increment();
-            setScreenId('screen1'); 
+            setScreenId('screen1');
         }
 
         //Logo and next page arrow
@@ -844,15 +846,17 @@ const Widget = () => {
             {
             let line = document.querySelector(".line");
             const maxCounter = 10;
-            line.animate([
-               // keyframes
-               { left: (counterPrev)*(375/maxCounter)-375 + "px" /*Линия с прошлого слайда*/},
-               { left: counter*(375/maxCounter)-375 + "px" }
-             ], {
-               // timing options
-               duration: 800
-             });
-             line.style.left =  counter*(375/maxCounter)-375 + "px";
+            if(counter<10){
+                line.animate([
+                    // keyframes
+                    { left: (counterPrev)*(375/maxCounter)-375 + "px" /*Линия с прошлого слайда*/},
+                    { left: counter*(375/maxCounter)-375 + "px" }
+                  ], {
+                    // timing options
+                    duration: 800
+                  });
+                  line.style.left =  counter*(375/maxCounter)-375 + "px";
+                 }
             })
             return html`<div class="lineGray"/><div class="line"/>`
     }
@@ -928,7 +932,7 @@ const Widget = () => {
         return html`
         <div class="choiceContainer">
             <div class="choiceMenu" style="${style}" >
-                ${choiceCards.map((card)=>{
+                ${choiceCards?.map((card)=>{
                     return html`
                     <${choiceButton} imgSource="${card.img}" imgHeight="${card.imgHeight}" text="${card.text}"
                     style="${card.style}" onclick="${card.onclick}"/>
@@ -945,12 +949,16 @@ const Widget = () => {
         const image = ()=>{
             return html`<img style="height: ${imgHeight};" alt="${text}" src="${imgSource}" />`
         }
-        
+        const textComponent = ()=>{
+            return html `
+            <p style=${textStyle}>${text}</p>
+            `
+        }
         return html`
             <div class="choiceBtn link" style="${style}" onClick="${onclick}">
                 ${(()=>{return imgSource && html`<${image}/>`})()}    
                 ${(()=>{return imgSource2 && html`<img src="${imgSource2}"/>`})()}                 
-                <p style="${textStyle}">${text}</p>
+                ${(()=>{return text && html `<${textComponent}/>`})()}
                 ${(()=>{return text2 && html`<p style="font-weight: 700; font-size: 18px; line-height: 25px; color: #0F0F0F;">${text2}</p>`})()}  
             </div>
         `;
@@ -1371,6 +1379,7 @@ const Widget = () => {
         const continueClicked = ()=>{
             if(!items.length==0){
                 updateUrlObjValue('shape', items.join(','));
+                items=[];
                 increment();
                 setScreenId('screen9');
             }
@@ -1394,15 +1403,118 @@ const Widget = () => {
         return html`
         <${headerText} text="Are you looking for any particular eyewear brands?" style="width: 254px"/>
         <${choiceButton}  style="${btnStyle} margin-top: 32px;"
-         text="Yes, I have some in mind" onclick=${()=>{setScreenId('screen10')}}/>
+         text="Yes, I have some in mind" onclick=${()=>{setScreenId('screen10');increment();}}/>
          <${choiceButton}  style="${btnStyle} margin-top: 16px;"
-         text="No, brand isn't important" onclick=${()=>{increment()}}/>
+         text="No, brand isn't important" onclick=${()=>{increment(2);}}/>
         `
     }
 
 
     const screen10 = ()=>{
-        console.log('screen10');
+        useEffect(()=>
+            {
+            let line = document.querySelector(".line");
+            
+            let maxCounter = 10;
+                line.animate([
+                    // keyframes
+                    { left: (counterPrev)*(375/maxCounter)-375 + "px" /*Линия с прошлого слайда*/},
+                    { left: counter*(375/maxCounter)-385 + "px" }
+                ], {
+                    // timing options
+                    duration: 800
+                });
+                line.style.left =  counter*(375/maxCounter)-385 + "px";
+            })
+
+        const menuStyle =  `display: flex; flex-direction: row; flex-wrap: wrap;justify-content: center; align-items: center; gap: 10px`
+        const cardStyle = `width: 159.74px;height: 102.9px;font-size: 13.72px;line-height: 14px;
+            box-shadow: 0px 1px 0px rgba(58, 72, 80, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 13.72px; justify-content: center;
+            `
+            
+        const cards=[
+                {
+                    img: "https://svgshare.com/i/hi5.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('ray_ban')},
+                },
+                {
+                    img: "https://svgshare.com/i/hic.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('oakley')},
+                },
+                {
+                    img: "https://svgshare.com/i/hh_.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('gucci')},
+                },
+                {
+                    img: "https://svgshare.com/i/hgs.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('armani_exchange')},
+                },
+                {
+                    img: "https://svgshare.com/i/hid.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('hilary_duff')},
+                },
+                {
+                    img: "https://svgshare.com/i/hiU.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('prada')},
+                },
+                {
+                    img: "https://svgshare.com/i/hiV.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('versace')},
+                },
+                {
+                    img: "https://svgshare.com/i/hhb.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('vogue')},
+                },
+                {
+                    img: "https://svgshare.com/i/hie.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('michael_kors')},
+                },
+                {
+                    img: "https://svgshare.com/i/hgt.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('coach')},
+                },
+                {
+                    img: "https://svgshare.com/i/hiq.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('tory_burch')},
+                },
+                {
+                    img: "https://svgshare.com/i/hj7.svg",
+                    style: cardStyle,
+                    onclick: ()=>{addItem('burberry')},
+                },
+                
+                
+                
+            ]
+    
+            const continueClicked = ()=>{
+                if(!items.length==0){
+                    updateUrlObjValue('shape', items.join(','));
+                    items=[];
+                    increment();
+                    setScreenId('screen9');
+                }
+               
+            }
+        return html`
+        <${headerText} text="Choose your favorite brands" style="width: 314px"/>
+        <${subtitleText} text="You can pick more than one."/>
+        <${choiceMenu} choiceCards="${cards}" style="${menuStyle}"/>
+        <button class="link btnBlue"  onclick="${continueClicked}" style="margin-top: 25px;background:#DEDEDE;">Continue</button>
+
+        `
     }
 
 
@@ -1432,7 +1544,7 @@ const Widget = () => {
                 line.style.left = '0px'
                 
                 })
-                return html`<div class="lineGray"/><div class="line"/>`
+                return html`<div class="line"/>`
         }
     
     
@@ -1462,7 +1574,8 @@ const Widget = () => {
                     }
                 }
                 string = string.slice(0, -1);
-                console.log(string);
+                let url = "URL: [" + string+"]"
+                console.log(url);
             }
             return html`
             <div class="main">
@@ -1483,8 +1596,8 @@ const Widget = () => {
     return html`
     ${styles}
     ${(()=>{return counter==0 && html`<${screen0}/>`})()} 
-    ${(()=>{return counter>0 && counter<10 && html`<${upbar}/><${main} screenId="${screenId}"/>`})()}
-    ${(()=>{return counter==10 && html`<${screen11}/>`})()} 
+    ${(()=>{return counter>0 && counter<=10 && html`<${upbar}/><${main} screenId="${screenId}"/>`})()}
+    ${(()=>{return counter==11 && html`<${screen11}/>`})()} 
     `;
 };
 
