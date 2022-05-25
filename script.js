@@ -782,7 +782,7 @@ const Widget = () => {
     const screen0  = ()=>{
         const nextPage = ()=>{
             increment();
-            setScreenId('screen1');
+            setScreenId('screen1'); 
         }
 
         //Logo and next page arrow
@@ -1157,11 +1157,6 @@ const Widget = () => {
     }
 
 
-    /*const printCounter = ()=>{
-        console.log('counter:' + counter);
-    }*/
-
-
     const screen5 = ()=>{
         urlObject.eyewear_type=='211'     ? 
         setScreenId('screen5_sunglasses') : 
@@ -1282,7 +1277,6 @@ const Widget = () => {
         }
         let btn = document.querySelector('.btnBlue');        
         btn.style.background = items.length==0?'#DEDEDE':'linear-gradient(270deg, #45C7FA 0%, #2196F3 100%)'
-        console.log(items)
     }
 
 
@@ -1413,14 +1407,84 @@ const Widget = () => {
 
 
     const screen11 = ()=>{
-        console.log('screen11');
+        const upbar = ()=>{
+
+
+            // Header upper part of upbar
+            // Back button, Close button, Start over
+            const header = ()=>{
+               
+                return html`
+                <div class="upbar_header">
+                <div class="logo">
+                    <img src="https://svgshare.com/i/hKp.svg"/>
+                </div>
+                    <div class="btnExit inlineFlex scale link" onclick="${startOver}"><img src="https://svgshare.com/i/hLZ.svg"/></div>        
+                </div>`
+        }
+    
+    
+            // Progress bar
+            const progress =()=>{
+                useEffect(()=>
+                {
+                let line = document.querySelector(".line");
+                line.style.left = '0px'
+                
+                })
+                return html`<div class="lineGray"/><div class="line"/>`
+        }
+    
+    
+            return html`
+            <div class="upbar">
+                <${header}/>
+                <${progress}/>
+            </div>`
+        }
+        const body = ()=>{
+            const grayText = `
+            width: 286px;
+            height: 28px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            color: #5B6971;
+            margin-top: 98px`
+            const send = ()=>{
+                let string = document.querySelector('#glasses-quiz-widget').dataset.source+"?"
+                for(let key in urlObject){
+                    if(urlObject[key]!=""){
+                        string+=key + "=" + urlObject[key]+"&"
+                    }
+                }
+                string = string.slice(0, -1);
+                console.log(string);
+            }
+            return html`
+            <div class="main">
+                <img src="https://svgshare.com/i/hhX.svg" style="margin-top: 38px"/>
+                <p class="blueText" style="width: 314px; font-size: 20px;">We've found some awesome frames for you!</p>
+                <p class="blackText" style="font-size: 16px; line-height: 150%; margin-top: 12px; width: 344px">Send the results to your email to receive special discounts.</p>
+                <button onclick="${send}" class="btnBlue" style="margin-top: 50px">Send</button>
+                <p style="${grayText}">By clicking ‘Send’ you agree to our Terms of Use & Privacy Policy and receiving promotion emails</p>
+            </div>
+            `
+        }
+        return html`
+            <${upbar}/>
+            <${body}/>
+        `
     }
     
     return html`
     ${styles}
-    ${(()=>{return counter==0 && html`<${screen0}/>`})()}
+    ${(()=>{return counter==0 && html`<${screen0}/>`})()} 
     ${(()=>{return counter>0 && counter<10 && html`<${upbar}/><${main} screenId="${screenId}"/>`})()}
-    ${(()=>{return counter==10 && html`<${screen11}/>`})()}
+    ${(()=>{return counter==10 && html`<${screen11}/>`})()} 
     `;
 };
 
